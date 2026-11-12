@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Econet Data</title>
+<style>
+body{font-family:sans-serif;background:#0a7a42;color:white;padding:20px;text-align:center}
+.card{background:white;color:black;padding:20px;border-radius:15px;max-width:400px;margin:auto}
+input,select,button{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc}
+button{background:#0a7a42;color:white;font-weight:bold;border:none;font-size:16px}
+</style>
+</head>
+<body>
+<h2>📶 ECONET DATA BUNDLES</h2>
+<div class="card">
+<label>Number to Receive Data</label>
+<input id="phone" placeholder="0771234567">
+<label>Choose Bundle</label>
+<select id="bundle">
+<option value="5GB - $2">5GB - $2</option>
+<option value="10GB - $3.5">10GB - $3.5</option>
+<option value="20GB - $6">20GB - $6</option>
+<option value="50GB - $12">50GB - $12</option>
+</select>
+<label>EcoCash Transaction ID</label>
+<input id="txid" placeholder="e.g. ECO123ABC">
+<p style="font-size:13px">
+1. Send money to EcoCash: <b>0770000000</b><br>
+2. Enter Transaction ID you received
+</p>
+<button onclick="buy()">SUBMIT ORDER</button>
+<p id="msg"></p>
+</div>
+<script>
+async function buy(){
+let phone=document.getElementById('phone').value;
+let bundle=document.getElementById('bundle').value;
+let txid=document.getElementById('txid').value;
+if(!phone || !txid){alert('Enter number and Transaction ID');return}
+let r=await fetch('/api/order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,bundle,txid})});
+document.getElementById('msg').innerText='Order sent! Wait for PIN on Telegram.';
+}
+</script>
+</body>
+</html>
